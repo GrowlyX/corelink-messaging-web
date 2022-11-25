@@ -1,22 +1,13 @@
-import {
-    USER_LOGIN_REQUEST,
-    USER_LOGIN_SUCCESS,
-    USER_LOGIN_FAIL,
-    USER_LOGOUT
-} from "../constants/userConstants";
-
-import {control} from "/corelink-client/corelink.lib";
+import {corelink} from "../pages/corelink.browser.lib"
 
 export const login = (
     username: string, password: string,
     host: string, port: number
-) => async (dispatch: any) => {
+) => async () => {
     try {
-        dispatch({
-            type: USER_LOGIN_REQUEST,
-        })
+        const control: any = corelink;
 
-        await control
+        return await control
             .connect(
                 { username: username, password: password },
                 { ControlIP: host, ControlPort: port }
@@ -28,25 +19,14 @@ export const login = (
                     workspace: "Log", proto: "ws",
                     type: ["LogStream"], echo: false, alert: false,
                 })
-
-                dispatch({
-                    type: USER_LOGIN_SUCCESS,
-                    payload: res
-                })
             })
-
     } catch (error) {
-        dispatch({
-            type: USER_LOGIN_FAIL,
-            payload: error
-        })
+        console.log("error = " + error)
     }
 }
 
-export const logout = () => async (dispatch: any) => {
-    dispatch({
-        type: USER_LOGOUT
-    })
+export const logout = () => async () => {
+    const control: any = corelink;
 
     await control.generic({ function: "disconnect" } );
     await control.generic({ function: "expire" } );

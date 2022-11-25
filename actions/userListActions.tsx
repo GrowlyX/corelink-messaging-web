@@ -1,11 +1,4 @@
-import {
-    USERLIST_REQUEST,
-    USERLIST_SUCCESS,
-    USERLIST_FAIL
-} from "../constants/userListConstants"
-
-// @ts-ignore
-import {corelink} from "../public/corelink.browser.lib"
+import {corelink} from "../pages/corelink.browser.lib"
 
 const control: any = corelink
 
@@ -14,29 +7,17 @@ interface UserList {
     token?: string | null
 }
 
-export const listUsers = (func: string) => async (dispatch: any) => {
+export const listUsers = (func: string) => async () => {
     try {
-        dispatch({
-            type: USERLIST_REQUEST
-        })
-
         const option: UserList = {function: func}
 
         control
             .generic(option)
             .then((res: any) => {
                 console.log("userList == ", res.userList)
-
-                dispatch({
-                    type: USERLIST_SUCCESS,
-                    payload: res.userList
-                })
             })
 
     } catch (error) {
-        dispatch({
-            type: USERLIST_FAIL,
-            payload: error
-        })
+        console.log("error = " + error)
     }
 }

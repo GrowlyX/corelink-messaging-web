@@ -17,16 +17,16 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Click the buttons below to either log in, or sign up.
+          Click the buttons below to enter a page:
         </p>
 
         <div className={styles.grid}>
-          <a href="%PUBLIC_URL%/login" className={styles.card}>
+          <a href="/login" className={styles.card}>
             <h2>Log In &rarr;</h2>
             <p>Login to your Corelink server using existing credentials.</p>
           </a>
 
-          <a href="%PUBLIC_URL%/sign-up" className={styles.card}>
+          <a href="/sign-up" className={styles.card}>
             <h2>Sign Up &rarr;</h2>
             <p>Create an account and start messaging.</p>
           </a>

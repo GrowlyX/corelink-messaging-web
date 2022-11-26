@@ -7,34 +7,22 @@ export default function Conversation() {
     const [messages, setMessages] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
 
-    const {user} = router.query
+    const { user } = router.query
 
     useEffect(() => {
         // TODO: subscribe to message stream
         //  grab message history of user (redis?)
     })
 
-    if (loading)
+    if (loading || !messages)
         return <div className={styles.container}>
             <Head>
-                <title>Corelink Messaging</title>
+                <title>Conversing with {user}</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
             <main className={styles.main}>
-                <h1>Loading messages...</h1>
-            </main>
-        </div>
-
-    if (!messages)
-        return <div className={styles.container}>
-            <Head>
-                <title>Corelink Messaging</title>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
-
-            <main className={styles.main}>
-                <h1>No messages found! (check console)</h1>
+                <h1>{loading ? "Loading messages..." : !messages ? "No messages were found!" : ""}</h1>
             </main>
         </div>
 

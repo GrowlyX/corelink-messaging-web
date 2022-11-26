@@ -1,9 +1,9 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '../../styles/Home.module.css'
 import React, {useEffect, useState} from "react";
 import {router} from "next/client";
 
-export default function Conversation() {
+export default function User() {
     const [messages, setMessages] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
 
@@ -12,12 +12,16 @@ export default function Conversation() {
     useEffect(() => {
         // TODO: subscribe to message stream
         //  grab message history of user (redis?)
-    })
+        setMessages([
+            "hors",
+            "donkey"
+        ])
+    }, [messages])
 
     if (loading || !messages)
         return <div className={styles.container}>
             <Head>
-                <title>Conversing with {user}</title>
+                <title>Corelink Messaging</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
@@ -29,7 +33,7 @@ export default function Conversation() {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Corelink Messaging</title>
+                <title>Conversing with {user}</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 

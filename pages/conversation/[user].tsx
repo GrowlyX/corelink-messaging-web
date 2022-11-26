@@ -1,12 +1,13 @@
 import Head from 'next/head'
 import styles from '../../styles/Home.module.css'
 import React, {useEffect, useState} from "react";
-import {router} from "next/client";
+import {useRouter} from "next/router";
 
 export default function User() {
     const [messages, setMessages] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
 
+    const router = useRouter()
     const { user } = router.query
 
     useEffect(() => {
@@ -38,11 +39,9 @@ export default function User() {
             </Head>
 
             <main className={styles.main}>
-                <ul>
-                    {messages.map((message) => (
-                        <li key="">{message.content}</li>
-                    ))}
-                </ul>
+                {messages.map((message) => (
+                    <p>{message.content}</p>
+                ))}
             </main>
         </div>
     )

@@ -68,7 +68,9 @@ export default function Users() {
             <main className={styles.main}>
                 <ul>
                     {users.map((user) => (
-                        <li key={user.username}>{user.email}</li>
+                        <li key={user.username}>
+                            <Link href={`/conversation/${user.username}`}>{user.email}</Link>
+                        </li>
                     ))}
                 </ul>
             </main>

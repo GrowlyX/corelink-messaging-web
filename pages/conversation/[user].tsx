@@ -19,13 +19,6 @@ export default function User() {
     useEffect(() => {
         const control: any = corelink
 
-        if (control.token === null) {
-            router.push("/login").then(() => {
-                console.log("User tried accessing protected page. Not yet logged in.")
-            })
-            return
-        }
-
         control
             .createSender({
                 workspace, protocol,
@@ -61,13 +54,15 @@ export default function User() {
                         })
 
                         setLoading(false)
+                    }, (err: any) => {
+                        console.log("Error while creating RECEIVER = " + err)
                     })
             }, (err: any) => {
-                console.log("error = " + err)
+                console.log("Error while creating SENDER = " + err)
             })
     }, [])
 
-    if (loading || !messages)
+    if (loading)
         return <div className={styles.container}>
             <Head>
                 <title>Corelink Messaging</title>
@@ -75,7 +70,8 @@ export default function User() {
             </Head>
 
             <main className={styles.main}>
-                <h1>{loading ? "Loading messages..." : !messages ? "No messages were found!" : ""}</h1>
+                <h1>Loading messages...</h1>
+                <p>Please wait.</p>
             </main>
         </div>
 

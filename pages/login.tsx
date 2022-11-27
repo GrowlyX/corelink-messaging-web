@@ -6,8 +6,8 @@ import {useRouter} from "next/navigation";
 import {corelink} from "./corelink.browser.lib";
 
 export default function Login() {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+    const [username, setUsername] = useState("Testuser")
+    const [password, setPassword] = useState("Testpassword")
 
     const [host, setHost] = useState("corelink.hpc.nyu.edu")
     const [port, setPort] = useState(20012)
@@ -22,8 +22,7 @@ export default function Login() {
 
         login(username, password, host, port)
             .call(null)
-            .then((res) => {
-                console.log("success = " + res)
+            .then(() => {
                 setResult("Success! Logged in successfully.")
 
                 router.push("/users")
@@ -34,7 +33,7 @@ export default function Login() {
     }
 
     const logoutTest = () => {
-        if (control.token === null) {
+        if (control.request === undefined) {
             setResult("You have not yet logged in!")
             return
         }
@@ -44,6 +43,8 @@ export default function Login() {
             .then((res) => {
                 console.log("success = " + res)
                 setResult("Success! Logged out successfully.")
+
+                router.push("/")
             }, (rej) => {
                 console.log("error = " + rej)
                 setResult("Failed to logout! " + rej)

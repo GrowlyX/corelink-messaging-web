@@ -28,7 +28,6 @@ export const corelink = {};
   let attempts = 0
   let connected = false
 
-
   const receiverStream = {}
   const senderStreams = []
   const allowedStreams = []
@@ -118,7 +117,7 @@ export const corelink = {};
         let retries = 5
         control.client.addEventListener('message', async (content) => { // it should be data instead of message (Abhishek Khanna), Rob : please review
           const parsed = await parseJson(content.data).catch((e) => reject(e))
-          console.log('parsed all', parsed)
+          if (debug) console.log('parsed all', parsed)
           for (let i = 0; i < parsed.length; i += 1) {
             retries -= 1
             if ('ID' in parsed[i] && parsed[i].ID === wdata.ID) {

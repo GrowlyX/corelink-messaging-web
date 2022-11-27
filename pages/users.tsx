@@ -15,7 +15,7 @@ export default function Users() {
     useEffect(() => {
         const control: any = corelink
 
-        if (control.client === undefined) {
+        if (control.token === null) {
             router.push("/login").then(() => {
                 console.log("User tried accessing protected page. Not yet logged in.")
             })
@@ -30,7 +30,7 @@ export default function Users() {
             }, (res) => {
                 console.log("Error while fetching users: " + res)
             })
-    })
+    }, [])
 
     if (loading)
         return <div className={styles.container}>
@@ -66,6 +66,9 @@ export default function Users() {
             </Head>
 
             <main className={styles.main}>
+                <h1>Users:</h1>
+                <p>Select one to start conversing...</p>
+
                 <ul>
                     {users.map((user) => (
                         <li key={user.username}>

@@ -11,12 +11,6 @@ export const login = (
             { username: username, password: password },
             { ControlIP: host, ControlPort: port }
         )
-        .then(() => {
-            control.createReceiver({
-                workspace: "Log", proto: "ws",
-                type: ["LogStream"], echo: false, alert: false,
-            })
-        })
 }
 
 export const logout = () => async () => {

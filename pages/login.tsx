@@ -34,7 +34,7 @@ export default function Login() {
     }
 
     const logoutTest = () => {
-        if (control.client === undefined) {
+        if (control.token === null) {
             setResult("You have not yet logged in!")
             return
         }

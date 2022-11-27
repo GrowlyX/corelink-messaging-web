@@ -19,7 +19,7 @@ export default function User() {
     useEffect(() => {
         const control: any = corelink
 
-        if (control.client === undefined) {
+        if (control.token === null) {
             router.push("/login").then(() => {
                 console.log("User tried accessing protected page. Not yet logged in.")
             })
@@ -65,7 +65,7 @@ export default function User() {
             }, (err: any) => {
                 console.log("error = " + err)
             })
-    })
+    }, [])
 
     if (loading || !messages)
         return <div className={styles.container}>

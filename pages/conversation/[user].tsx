@@ -19,7 +19,7 @@ export default function User() {
     useEffect(() => {
         const control: any = corelink
 
-        if (control.request === undefined) {
+        if (control.client === undefined) {
             router.push("/login").then(() => {
                 console.log("User tried accessing protected page. Not yet logged in.")
             })
@@ -50,6 +50,10 @@ export default function User() {
                         })
 
                         control.on('data', (streamID: any, data: { toString: () => any; }, header: any) => {
+                            if (header.username !== user) {
+                                return
+                            }
+
                             messages.push(data.toString()) // TODO(subham): does push refresh page?
                             setMessages(messages)
 

@@ -15,7 +15,7 @@ export default function Users() {
     useEffect(() => {
         const control: any = corelink
 
-        if (control.request === undefined) {
+        if (control.client === undefined) {
             router.push("/login").then(() => {
                 console.log("User tried accessing protected page. Not yet logged in.")
             })

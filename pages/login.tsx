@@ -3,6 +3,7 @@ import {login, logout} from "../actions/userActions";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import {useRouter} from "next/navigation";
+import {corelink} from "./corelink.browser.lib";
 
 export default function Login() {
     const [username, setUsername] = useState("")
@@ -13,6 +14,8 @@ export default function Login() {
 
     const [result, setResult] = useState("")
     const router = useRouter()
+
+    const control: any = corelink
 
     const submit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -31,6 +34,11 @@ export default function Login() {
     }
 
     const logoutTest = () => {
+        if (control.client === undefined) {
+            setResult("You have not yet logged in!")
+            return
+        }
+
         logout()
             .call(null)
             .then((res) => {

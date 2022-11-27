@@ -3,12 +3,25 @@ import styles from '../styles/Home.module.css'
 import {listUsers} from "../actions/userListActions";
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
+import {corelink} from "./corelink.browser.lib";
+import {useRouter} from "next/router";
 
 export default function Users() {
     const [users, setUsers] = useState<any[]>([])
     const [loading, setLoading] = useState(false)
 
+    const router = useRouter()
+
     useEffect(() => {
+        const control: any = corelink
+
+        if (control.request === undefined) {
+            router.push("/login").then(() => {
+                console.log("User tried accessing protected page. Not yet logged in.")
+            })
+            return
+        }
+
         listUsers("listUsers")
             .call(null)
             .then((res) => {
@@ -28,6 +41,7 @@ export default function Users() {
 
             <main className={styles.main}>
                 <h1>Loading...</h1>
+                <p>The content is currently loading.</p>
             </main>
         </div>
 

@@ -17,7 +17,14 @@ export default function User() {
     const {user} = router.query
 
     useEffect(() => {
-        let control: any = corelink
+        const control: any = corelink
+
+        if (control.request === undefined) {
+            router.push("/login").then(() => {
+                console.log("User tried accessing protected page. Not yet logged in.")
+            })
+            return
+        }
 
         control
             .createSender({

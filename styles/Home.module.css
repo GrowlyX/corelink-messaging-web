@@ -75,6 +75,12 @@
   font-size: 1.1rem;
   font-family: Ubuntu;
 }
+.centerBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
 .textBox {
   /* cemtered and shit yea */
   margin: 0 auto;

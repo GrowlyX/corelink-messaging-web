@@ -119,7 +119,9 @@ export default function User() {
 
                 <ul>
                     {messages.map((message) => (
-                        <li key={message.sent}>{message.content}</li>
+                        <li key={message.id}>
+                        <p>{message.Username} - {message.sent}: {message.content}</p>
+                        </li>
                     ))}
                 </ul>
                 <div className={styles.card}>
@@ -131,7 +133,7 @@ export default function User() {
                 }>Type here...</textarea>
                 </div>
 
-    
+                <div className={styles.centerBox}>
                 <button onClick={() => {
                     if (sender != null) {
                         let control: any = corelink
@@ -152,6 +154,8 @@ export default function User() {
                     console.log("Sender does not exist! Could not send message.")
                 }}>Click to send message!
                 </button>
+                </div>
+
                 </div>
             </main>
             

@@ -58,6 +58,10 @@ export default function Login() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
 
+            {/* {router.query.error ? <>
+                <h1>{router.query.error}</h1>
+            </> : <></>} */}
+
             <main className={styles.main}>
                 <form onSubmit={submit} autoComplete="on">
                     <br></br>

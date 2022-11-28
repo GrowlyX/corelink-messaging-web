@@ -16,7 +16,12 @@ export default function Users() {
         const control: any = corelink
 
         if (!control.isConnected()) {
-            router.push("/login").then(() => {
+            router.push({
+                pathname: "/login",
+                query: { 
+                    error: "You're not connected to Corelink. Please login."
+                }
+            }).then(() => {
                 console.log("user is not connected to corelink.")
             })
             return

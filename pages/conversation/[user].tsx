@@ -112,17 +112,24 @@ export default function User() {
             </Head>
 
             <main className={styles.main}>
+
+                <div className={styles.chatCard}>
+                    
+
+
                 <ul>
                     {messages.map((message) => (
                         <li key={message.sent}>{message.content}</li>
                     ))}
                 </ul>
+                <div className={styles.card}>
 
                 <textarea onChange={
                     (message) => {
                         setNewMessage(message.target.value)
                     }
                 }>Type here...</textarea>
+                </div>
 
     
                 <button onClick={() => {
@@ -145,7 +152,9 @@ export default function User() {
                     console.log("Sender does not exist! Could not send message.")
                 }}>Click to send message!
                 </button>
+                </div>
             </main>
+            
         </div>
     )
 }

@@ -68,7 +68,26 @@
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
-
+.chatCard {
+  background: #36393E;
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-family: Ubuntu;
+}
+.textBox {
+  /* cemtered and shit yea */
+  margin: 0 auto;
+  width: 50%;
+  border: 1px solid #000; 
+  padding: 10px;
+  background: #36393E;
+  border-radius: 5px;
+  color: #fff;
+  font-family: Ubuntu;
+  font-size: 1.1rem;
+  text-align: center; 
+}
 .grid {
   display: flex;
   align-items: center;

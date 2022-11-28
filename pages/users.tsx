@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import {corelink} from "./corelink.browser.lib";
 import {useRouter} from "next/router";
+import Navbar from "./partials/Navbar";
 
 export default function Users() {
     const [users, setUsers] = useState<any[]>([])
@@ -18,7 +19,7 @@ export default function Users() {
         if (!control.isConnected()) {
             router.push({
                 pathname: "/login",
-                query: { 
+                query: {
                     error: "You're not connected to Corelink. Please login."
                 }
             }).then(() => {
@@ -43,6 +44,7 @@ export default function Users() {
                 <title>Corelink Messaging</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <Navbar></Navbar>
 
             <main className={styles.main}>
                 <h1>Loading...</h1>
@@ -57,6 +59,7 @@ export default function Users() {
                 <title>Corelink Messaging</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <Navbar></Navbar>
 
             <main className={styles.main}>
                 <h1>No users found! (check console)</h1>
@@ -69,6 +72,7 @@ export default function Users() {
                 <title>Corelink Messaging</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <Navbar></Navbar>
 
             <main className={styles.main}>
                 <h1>Users:</h1>

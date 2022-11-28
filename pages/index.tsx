@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import Navbar from "./partials/Navbar";
 
 export default function Home() {
   return (
@@ -8,8 +9,10 @@ export default function Home() {
         <title>Corelink Messaging</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar></Navbar>
 
       <main className={styles.main}>
+
         <h1 className={styles.title}>
           Welcome to Corelink Messaging
         </h1>

@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import {useRouter} from "next/navigation";
 import {corelink} from "./corelink.browser.lib";
+import Navbar from "./partials/Navbar";
 
 export default function Login() {
     const [username, setUsername] = useState("Testuser")
@@ -14,8 +15,6 @@ export default function Login() {
 
     const [result, setResult] = useState("")
     const router = useRouter()
-
-    const control: any = corelink
 
     const submit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -38,6 +37,7 @@ export default function Login() {
                 <title>Corelink Messaging</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <Navbar></Navbar>
 
             <main className={styles.main}>
                 <form onSubmit={submit} autoComplete="on">

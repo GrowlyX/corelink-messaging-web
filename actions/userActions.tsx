@@ -14,6 +14,5 @@ export const login = (
 }
 
 export const logout = () => async () => {
-    await control.generic({ function: "disconnect" } );
-    await control.generic({ function: "expire" } );
+    await control.exit()
 }

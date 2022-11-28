@@ -13,27 +13,24 @@ export default function Navbar() {
         logout()
             .call(null)
             .then((res) => {
-                router.push("/")
             }, (rej) => {
                 console.log("error = " + rej)
             })
+
+        router.push("/")
     }
 
     return (
         <div className="navbar">
-            <Link href="/">
-                <a>Home</a>
-            </Link>
-            <Link href="/users">
-                <a>Users</a>
-            </Link>
+            <Link href="/">Home</Link> |
 
             {control.isConnected() ? <>
+                <Link href="/users"> Users</Link> | <b> </b>
                 <button onClick={logoutFunc}>Logout</button>
             </> : <>
-                <Link href="/login">
-                    <a>Login</a>
-                </Link>
+                <b> </b><button onClick={
+                    () => { router.push("/login") }
+                }>Login</button>
             </>}
         </div>
     );

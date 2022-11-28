@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {corelink} from "../corelink.browser.lib";
 import {datatype, protocol, workspace} from "../../constants/constants";
+import Navbar from "../partials/Navbar";
 
 function ab2str(buf: Iterable<number>) {
     // @ts-ignore
@@ -101,6 +102,7 @@ export default function User() {
                 <title>Corelink Messaging</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <Navbar></Navbar>
 
             <main className={styles.main}>
                 <h1>Loading messages...</h1>
@@ -114,6 +116,7 @@ export default function User() {
                 <title>Conversing with {user}</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <Navbar></Navbar>
 
             <main className={styles.main}>
                 <div className={styles.chatCard}>

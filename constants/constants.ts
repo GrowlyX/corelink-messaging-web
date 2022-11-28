@@ -1,3 +1,3 @@
-export const workspace = "shubham_ws"
-export const protocol = "udp"
-export const datatype = "private_messages"
+export const workspace = "Holodeck"
+export const protocol = "tcp"
+export const datatype = "distance"

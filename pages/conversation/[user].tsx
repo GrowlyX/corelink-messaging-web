@@ -5,8 +5,24 @@ import {useRouter} from "next/router";
 import {corelink} from "../corelink.browser.lib";
 import {datatype, protocol, workspace} from "../../constants/constants";
 
+function ab2str(buf: Iterable<number>) {
+    // @ts-ignore
+    return String.fromCharCode.apply(null, new Uint8Array(buf))
+}
+
+function str2ab(str: string) {
+    const buf = new ArrayBuffer(str.length)
+    const bufView = new Uint8Array(buf)
+
+    for (let i = 0; i < str.length; i += 1) {
+        bufView[i] = str.charCodeAt(i)
+    }
+
+    return buf
+}
+
 export default function User() {
-    const [messages, setMessages] = useState<string[]>([])
+    const [messages, setMessages] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
 
     const [sender, setSender] = useState<any>(null)
@@ -27,36 +43,36 @@ export default function User() {
                     targetUser: user
                 },
             })
-            .then((res: any) => {
-                setSender(res)
+            .then(async (res: any) => {
 
-                control
+                await control
                     .createReceiver({
                         workspace, protocol,
                         type: datatype,
                         echo: true, alert: true
                     })
-                    .then(() => {
-                        control.on('receiver', async (data: { streamID: any; }) => {
-                            const options = { streamIDs: [data.streamID] }
-                            await control.subscribe(options)
-                        })
-
-                        control.on('data', (streamID: any, data: { toString: () => any; }, header: any) => {
-                            if (header.username !== user) {
-                                return
-                            }
-
-                            messages.push(data.toString()) // TODO(subham): does push refresh page?
-                            setMessages(messages)
-
-                            console.log(streamID, data.toString(), JSON.stringify(header))
-                        })
-
-                        setLoading(false)
-                    }, (err: any) => {
-                        console.log("Error while creating RECEIVER = " + err)
+                    .catch((err: any) => {
+                        console.log("Error = " + err)
                     })
+
+                control.on('receiver', async (data: any) => {
+                    const stream: any = {streamIDs: [data.streamID]}
+                    await control.subscribe(stream)
+                })
+
+                control.on('data', (streamID: any, data: any, header: any) => {
+                    try {
+                        const json = JSON.parse(ab2str(data))
+
+                        if (json.target == user) {
+                            setMessages(result => [...result, json]);
+                        }
+                    } catch (exception) {
+                        console.log("ERROR while trying to receive message = " + exception)
+                    }
+                })
+                setSender(res)
+                setLoading(false)
             }, (err: any) => {
                 console.log("Error while creating SENDER = " + err)
             })
@@ -83,10 +99,12 @@ export default function User() {
             </Head>
 
             <main className={styles.main}>
-                {messages.map((message) => (
-                    // eslint-disable-next-line react/jsx-key
-                    <p>{message}</p>
-                ))}
+                <ul>
+                    {messages.map((message) => (
+                        <li key={message.sent}>{message.content}</li>
+                    ))}
+                    //
+                </ul>
 
                 <textarea onChange={
                     (message) => {
@@ -98,7 +116,14 @@ export default function User() {
                     if (sender != null) {
                         let control: any = corelink
                         control.send(
-                            sender, Buffer.from(newMessage)
+                            sender,
+                            str2ab(
+                                JSON.stringify({
+                                    content: newMessage,
+                                    sent: Date.now(),
+                                    target: user
+                                })
+                            )
                         )
                         return
                     }

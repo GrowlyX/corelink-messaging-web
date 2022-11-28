@@ -124,6 +124,7 @@ export default function User() {
                     }
                 }>Type here...</textarea>
 
+    
                 <button onClick={() => {
                     if (sender != null) {
                         let control: any = corelink

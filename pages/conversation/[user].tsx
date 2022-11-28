@@ -38,7 +38,7 @@ export default function User() {
         if (!control.isConnected()) {
             router.push({
                 pathname: "/login",
-                query: { 
+                query: {
                     error: "You're not connected to Corelink. Please login."
                 }
             }).then(() => {
@@ -75,8 +75,12 @@ export default function User() {
                 control.on('data', (streamID: any, data: any, header: any) => {
                     try {
                         const json = JSON.parse(ab2str(data))
+                        const self = control.credentials().username
 
-                        if (json.target == user) {
+                        if (
+                            (json.target === user && json.from === self) ||
+                            (json.from === user && json.target === self)
+                        ) {
                             setMessages(result => [...result, json]);
                         }
                     } catch (exception) {
@@ -112,15 +116,15 @@ export default function User() {
             </Head>
 
             <main className={styles.main}>
-
                 <div className={styles.chatCard}>
-                    
-
+                    <h2>Messaging {user}</h2>
 
                 <ul>
                     {messages.map((message) => (
                         <li key={message.id}>
-                        <p>{message.Username} - {message.sent}: {message.content}</p>
+                        <p><b>{message.from} - {
+                            new Date(message.sent).toLocaleTimeString("en-US")
+                        }</b>: {message.content}</p>
                         </li>
                     ))}
                 </ul>
@@ -144,7 +148,8 @@ export default function User() {
                                 JSON.stringify({
                                     content: newMessage,
                                     sent: Date.now(),
-                                    target: user
+                                    target: user,
+                                    from: control.credentials().username
                                 })
                             )
                         )
@@ -158,7 +163,7 @@ export default function User() {
 
                 </div>
             </main>
-            
+
         </div>
     )
 }

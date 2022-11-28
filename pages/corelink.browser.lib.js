@@ -514,6 +514,10 @@ export const corelink = {};
     return connected
   }
 
+  function credentials() {
+    return connCredentials
+  }
+
   /**
    *Connects with client at the specified Port and IP number after verifying login credentials
    *like username,password and token defined in the 'login' function.
@@ -1220,6 +1224,7 @@ export const corelink = {};
   // End Common Functions
 
   this.isConnected = isConnected
+  this.credentials = credentials
 
   this.debug = debug
   this.on = on

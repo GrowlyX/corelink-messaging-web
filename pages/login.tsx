@@ -32,35 +32,12 @@ export default function Login() {
             })
     }
 
-    const logoutTest = () => {
-        if (control.request === undefined) {
-            setResult("You have not yet logged in!")
-            return
-        }
-
-        logout()
-            .call(null)
-            .then((res) => {
-                console.log("success = " + res)
-                setResult("Success! Logged out successfully.")
-
-                router.push("/")
-            }, (rej) => {
-                console.log("error = " + rej)
-                setResult("Failed to logout! " + rej)
-            })
-    }
-
     return (
         <div className={styles.container}>
             <Head>
                 <title>Corelink Messaging</title>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
-
-            {/* {router.query.error ? <>
-                <h1>{router.query.error}</h1>
-            </> : <></>} */}
 
             <main className={styles.main}>
                 <form onSubmit={submit} autoComplete="on">
@@ -81,8 +58,6 @@ export default function Login() {
                 </form>
 
                 <p>{result}</p>
-
-                <button onClick={logoutTest}>Logout Test</button>
             </main>
         </div>
     )

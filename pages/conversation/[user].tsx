@@ -34,7 +34,13 @@ export default function User() {
 
     useEffect(() => {
         const control: any = corelink
-        console.log("hey doing this first time")
+
+        if (!control.isConnected()) {
+            router.push("/login").then(() => {
+                console.log("user is not connected to corelink.")
+            })
+            return
+        }
 
         control
             .createSender({

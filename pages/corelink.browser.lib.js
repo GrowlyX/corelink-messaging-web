@@ -510,6 +510,9 @@ export const corelink = {};
     }))
   }
 
+  function isConnected() {
+    return connected
+  }
 
   /**
    *Connects with client at the specified Port and IP number after verifying login credentials
@@ -1216,6 +1219,7 @@ export const corelink = {};
 
   // End Common Functions
 
+  this.isConnected = isConnected
 
   this.debug = debug
   this.on = on

@@ -15,12 +15,12 @@ export default function Users() {
     useEffect(() => {
         const control: any = corelink
 
-        // if (control.request === undefined) {
-        //     router.push("/login").then(() => {
-        //         console.log("User tried accessing protected page. Not yet logged in.")
-        //     })
-        //     return
-        // }
+        if (!control.isConnected()) {
+            router.push("/login").then(() => {
+                console.log("user is not connected to corelink.")
+            })
+            return
+        }
 
         listUsers("listUsers")
             .call(null)

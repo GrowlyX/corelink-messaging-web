@@ -1,3 +1,3 @@
 export const workspace = "Holodeck"
-export const protocol = "tcp"
+export const protocol = "ws"
 export const datatype = "distance"

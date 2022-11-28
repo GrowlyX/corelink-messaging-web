@@ -10,10 +10,6 @@ export default function Navbar() {
     const router = useRouter()
 
     const logoutFunc = () => {
-        if (control.isConnected()) {
-            return
-        }
-
         logout()
             .call(null)
             .then((res) => {
@@ -31,7 +27,14 @@ export default function Navbar() {
             <Link href="/users">
                 <a>Users</a>
             </Link>
-            <button onClick={logoutFunc}>Logout</button>
+
+            {control.isConnected() ? <>
+                <button onClick={logoutFunc}>Logout</button>
+            </> : <>
+                <Link href="/login">
+                    <a>Login</a>
+                </Link>
+            </>}
         </div>
     );
 }

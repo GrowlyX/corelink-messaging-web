@@ -34,6 +34,7 @@ export default function User() {
 
     useEffect(() => {
         const control: any = corelink
+        console.log("hey doing this first time")
 
         control
             .createSender({
@@ -71,6 +72,7 @@ export default function User() {
                         console.log("ERROR while trying to receive message = " + exception)
                     }
                 })
+
                 setSender(res)
                 setLoading(false)
             }, (err: any) => {
@@ -103,7 +105,6 @@ export default function User() {
                     {messages.map((message) => (
                         <li key={message.sent}>{message.content}</li>
                     ))}
-                    //
                 </ul>
 
                 <textarea onChange={
@@ -115,6 +116,7 @@ export default function User() {
                 <button onClick={() => {
                     if (sender != null) {
                         let control: any = corelink
+
                         control.send(
                             sender,
                             str2ab(

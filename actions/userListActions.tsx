@@ -1,4 +1,4 @@
-import {corelink} from "../pages/corelink.browser.lib"
+import {corelink} from "../lib/corelink.browser.lib"
 
 const control: any = corelink
 

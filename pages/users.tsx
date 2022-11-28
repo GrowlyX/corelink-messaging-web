@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 import {listUsers} from "../actions/userListActions";
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
-import {corelink} from "./corelink.browser.lib";
+import {corelink} from "../lib/corelink.browser.lib";
 import {useRouter} from "next/router";
 import Navbar from "./partials/Navbar";
 

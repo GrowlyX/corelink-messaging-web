@@ -3,7 +3,7 @@ import {login, logout} from "../actions/userActions";
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import {useRouter} from "next/navigation";
-import {corelink} from "./corelink.browser.lib";
+import {corelink} from "../lib/corelink.browser.lib";
 import Navbar from "./partials/Navbar";
 
 export default function Login() {

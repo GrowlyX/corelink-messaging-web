@@ -1,7 +1,7 @@
 // Navbar for the top of pages
 import React from 'react';
 import Link from 'next/link';
-import {corelink} from "../corelink.browser.lib";
+import {corelink} from "../../lib/corelink.browser.lib";
 import {logout} from "../../actions/userActions";
 import {useRouter} from "next/router";
 

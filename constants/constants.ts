@@ -1,3 +1,3 @@
 export const workspace = "shubham_ws"
-export const protocol = "tcp"
+export const protocol = "ws"
 export const datatype = "distance"

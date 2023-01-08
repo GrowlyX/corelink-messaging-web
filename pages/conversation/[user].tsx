@@ -124,7 +124,7 @@ export default function User() {
 
                 <ul>
                     {messages.map((message) => (
-                        <li key={message.id}>
+                        <li key={message.date}>
                         <p><b>{message.from} - {
                             new Date(message.sent).toLocaleTimeString("en-US")
                         }</b>: {message.content}</p>
@@ -137,7 +137,7 @@ export default function User() {
                     (message) => {
                         setNewMessage(message.target.value)
                     }
-                }>Type here...</textarea>
+                } defaultValue={"Type here..."}></textarea>
                 </div>
 
                 <div className={styles.centerBox}>

@@ -13,6 +13,7 @@ export default function Navbar() {
         logout()
             .call(null)
             .then((res) => {
+
             }, (rej) => {
                 console.log("error = " + rej)
             })

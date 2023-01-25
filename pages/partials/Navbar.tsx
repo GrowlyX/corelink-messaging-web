@@ -13,12 +13,11 @@ export default function Navbar() {
         logout()
             .call(null)
             .then((res) => {
-
+                router.push("/")
+                    .then(r => {})
             }, (rej) => {
                 console.log("error = " + rej)
             })
-
-        router.push("/")
     }
 
     return (

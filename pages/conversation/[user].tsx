@@ -43,7 +43,6 @@ export default function User() {
                     error: "You're not connected to Corelink. Please login."
                 }
             }).then(() => {
-                console.log("user is not connected to corelink.")
             })
             return
         }
@@ -57,7 +56,6 @@ export default function User() {
                 },
             })
             .then(async (res: any) => {
-                console.log(control.credentials().username)
                 await control
                     .createReceiver({
                         workspace, protocol,
@@ -66,13 +64,11 @@ export default function User() {
                     .catch((err: any) => {
                         console.log("Error = " + err)
                     })
-                console.log("1")
                 control.on('receiver', async (data: any) => {
                     const stream: any = { streamIDs: [data.streamID] }
                     await control.subscribe(stream)
                 })
 
-                console.log("2")
                 control.on('data', (streamID: any, data: any, header: any) => {
                     try {
                         const json = JSON.parse(ab2str(data))
@@ -82,11 +78,8 @@ export default function User() {
                     }
                 })
 
-                console.log("3")
                 setSender(res)
-                console.log("4")
                 setLoading(false)
-                console.log("5")
             }, (err: any) => {
                 console.log("Error while creating SENDER = " + err)
             })
